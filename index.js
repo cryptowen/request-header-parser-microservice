@@ -3,11 +3,11 @@ var express = require("express");
 var app = express();
 
 app.get('/api/whoami/', function(req, res) {
-  console.log(req.headers);
+  // console.log(req.headers);
   var res_json = {
     language: req.headers['accept-language'].split(',')[0],
     ipaddress: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
-    software: req.headers['user-agent']
+    software: req.headers['user-agent'].match(/\(([^()]+)\)/)[1]
   };
   res.json(res_json);
 });
